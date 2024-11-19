@@ -1,0 +1,9 @@
+CEJST_Shapefile/usa/usa_shapefile.shp
+
+CEJST_Shapefile
+
+assets/CEJST_Shapefile.zip
+assets/cb_2021_us_tract_500k.zip
+assets/cb_2021_us_tract_500k/cb_2021_us_tract_500k.shp
+notebooks/copy_of_poverty_analysis.ipynb
+notebooks/poverty_analysis.ipynb

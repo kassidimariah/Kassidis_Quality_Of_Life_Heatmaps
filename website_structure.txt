@@ -1,0 +1,15 @@
+project/
+├── index.html
+├── education.html
+├── healthcare.html
+├── climate.html
+├── poverty.html
+├── style.css
+├── scripts/
+│   ├── education_map.js
+│   ├── healthcare_map.js
+│   ├── climate_map.js
+│   ├── poverty_map.js
+│   ├── shared.js
+└── assets/
+    └── (optional: images or data for heatmaps)
