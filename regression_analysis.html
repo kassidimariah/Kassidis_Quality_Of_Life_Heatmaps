@@ -7541,7 +7541,7 @@ Key variables analyzed:</p>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [2]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [1]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -7556,6 +7556,8 @@ Key variables analyzed:</p>
 <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">colormaps</span> <span class="k">as</span> <span class="n">cmap</span>
 <span class="kn">import</span> <span class="nn">folium</span>
 <span class="kn">from</span> <span class="nn">shapely.ops</span> <span class="kn">import</span> <span class="n">unary_union</span>
+<span class="kn">from</span> <span class="nn">statsmodels.formula.api</span> <span class="kn">import</span> <span class="n">ols</span>
+<span class="kn">from</span> <span class="nn">statsmodels.stats.anova</span> <span class="kn">import</span> <span class="n">anova_lm</span>
 
 
 <span class="o">%</span><span class="k">matplotlib</span> inline
@@ -7573,7 +7575,7 @@ Key variables analyzed:</p>
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>C:\Users\Kassidi\AppData\Local\Temp\ipykernel_15772\392024889.py:1: DeprecationWarning: 
+<pre>C:\Users\Kassidi\AppData\Local\Temp\ipykernel_13512\396716062.py:1: DeprecationWarning: 
 Pyarrow will become a required dependency of pandas in the next major release of pandas (pandas 3.0),
 (to allow more performant data types, such as the Arrow string type, and better interoperability with other libraries)
 but was not found to be installed on your system.
@@ -7609,7 +7611,7 @@ The data was cleaned and prepared as follows:</p>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [3]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [2]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">regression_cols</span> <span class="o">=</span> <span class="p">[</span>
@@ -7638,7 +7640,9 @@ The data was cleaned and prepared as follows:</p>
     <span class="s1">'Low life expectancy (percentile)'</span><span class="p">,</span> 
     <span class="s1">'Percent age 10 to 64'</span><span class="p">,</span> 
     <span class="s1">'Percent age over 64'</span><span class="p">,</span> 
-    <span class="s1">'Percent age under 10'</span>
+    <span class="s1">'Percent age under 10'</span><span class="p">,</span>
+    <span class="s1">'Low median household income as a percent of area median income (percentile)'</span>
+    
 <span class="p">]</span>   
 
 <span class="n">reg_stats</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">r</span><span class="s2">"C:</span><span class="se">\\</span><span class="s2">New_499_Code</span><span class="se">\\</span><span class="s2">499_Cleaned_Abbreviated_CEJST_Disadvantaged_Communities_Data.csv"</span><span class="p">,</span> <span class="n">usecols</span><span class="o">=</span><span class="n">regression_cols</span><span class="p">)</span>
@@ -7652,7 +7656,7 @@ The data was cleaned and prepared as follows:</p>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [4]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [3]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">reg_stats</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
@@ -7666,7 +7670,7 @@ The data was cleaned and prepared as follows:</p>
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[4]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[3]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <div>
 <style scoped="">
@@ -7697,7 +7701,6 @@ The data was cleaned and prepared as follows:</p>
 <th>Percent Hispanic or Latino</th>
 <th>Percent other races</th>
 <th>...</th>
-<th>PM2.5 in the air</th>
 <th>Percent pre-1960s housing (lead paint indicator) (percentile)</th>
 <th>Percent pre-1960s housing (lead paint indicator)</th>
 <th>Current asthma among adults aged greater than or equal to 18 years (percentile)</th>
@@ -7707,6 +7710,7 @@ The data was cleaned and prepared as follows:</p>
 <th>Coronary heart disease among adults aged greater than or equal to 18 years (percentile)</th>
 <th>Coronary heart disease among adults aged greater than or equal to 18 years</th>
 <th>Low life expectancy (percentile)</th>
+<th>Low median household income as a percent of area median income (percentile)</th>
 </tr>
 </thead>
 <tbody>
@@ -7723,7 +7727,6 @@ The data was cleaned and prepared as follows:</p>
 <td>0.01</td>
 <td>0.00</td>
 <td>...</td>
-<td>9.15</td>
 <td>41.0</td>
 <td>17.0</td>
 <td>57.0</td>
@@ -7733,6 +7736,7 @@ The data was cleaned and prepared as follows:</p>
 <td>59.0</td>
 <td>640.0</td>
 <td>89.0</td>
+<td>29.0</td>
 </tr>
 <tr>
 <th>1</th>
@@ -7747,7 +7751,6 @@ The data was cleaned and prepared as follows:</p>
 <td>0.01</td>
 <td>0.00</td>
 <td>...</td>
-<td>9.18</td>
 <td>43.0</td>
 <td>19.0</td>
 <td>82.0</td>
@@ -7757,6 +7760,7 @@ The data was cleaned and prepared as follows:</p>
 <td>49.0</td>
 <td>590.0</td>
 <td>65.0</td>
+<td>61.0</td>
 </tr>
 <tr>
 <th>2</th>
@@ -7771,7 +7775,6 @@ The data was cleaned and prepared as follows:</p>
 <td>0.06</td>
 <td>0.06</td>
 <td>...</td>
-<td>9.20</td>
 <td>22.0</td>
 <td>5.0</td>
 <td>65.0</td>
@@ -7781,6 +7784,7 @@ The data was cleaned and prepared as follows:</p>
 <td>60.0</td>
 <td>650.0</td>
 <td>NaN</td>
+<td>38.0</td>
 </tr>
 <tr>
 <th>3</th>
@@ -7795,7 +7799,6 @@ The data was cleaned and prepared as follows:</p>
 <td>0.01</td>
 <td>0.00</td>
 <td>...</td>
-<td>9.23</td>
 <td>31.0</td>
 <td>11.0</td>
 <td>27.0</td>
@@ -7805,6 +7808,7 @@ The data was cleaned and prepared as follows:</p>
 <td>66.0</td>
 <td>680.0</td>
 <td>77.0</td>
+<td>30.0</td>
 </tr>
 <tr>
 <th>4</th>
@@ -7819,7 +7823,6 @@ The data was cleaned and prepared as follows:</p>
 <td>0.04</td>
 <td>0.00</td>
 <td>...</td>
-<td>9.24</td>
 <td>1.0</td>
 <td>0.0</td>
 <td>37.0</td>
@@ -7829,10 +7832,11 @@ The data was cleaned and prepared as follows:</p>
 <td>31.0</td>
 <td>500.0</td>
 <td>41.0</td>
+<td>22.0</td>
 </tr>
 </tbody>
 </table>
-<p>5 rows × 27 columns</p>
+<p>5 rows × 28 columns</p>
 </div>
 </div>
 </div>
@@ -7870,7 +7874,7 @@ Formula: Q("PM2.5 in the air") ~ Q("Percent White") + Q("Percent Black or Africa
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [5]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [4]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
@@ -7885,12 +7889,10 @@ Formula: Q("PM2.5 in the air") ~ Q("Percent White") + Q("Percent Black or Africa
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [5]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1">#conduct ols logistic regression on PM2.5 and all race variables</span>
-<span class="c1">#regression formula</span>
-<span class="n">model</span> <span class="o">=</span> <span class="n">ols</span><span class="p">(</span><span class="s1">'Q("PM2.5 in the air") ~ Q("Percent American Indian / Alaska Native") + Q("Percent Asian") + Q("Percent Black or African American alone") + Q("Percent Hispanic or Latino") + Q("Percent Native Hawaiian or Pacific") + Q("Percent other races") + Q("Percent White")'</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">reg_stats</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">ols</span><span class="p">(</span><span class="s1">'Q("PM2.5 in the air") ~ Q("Percent American Indian / Alaska Native") + Q("Percent Asian") + Q("Percent Black or African American alone") + Q("Percent Hispanic or Latino") + Q("Percent Native Hawaiian or Pacific") + Q("Percent other races") + Q("Percent White")'</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">reg_stats</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
 <span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -7902,7 +7904,7 @@ Formula: Q("PM2.5 in the air") ~ Q("Percent White") + Q("Percent Black or Africa
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[ ]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[5]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <table class="simpletable">
 <caption>OLS Regression Results</caption>
@@ -7916,10 +7918,10 @@ Formula: Q("PM2.5 in the air") ~ Q("Percent White") + Q("Percent Black or Africa
 <th>Method:</th> <td>Least Squares</td> <th>  F-statistic:       </th> <td>   2951.</td>
 </tr>
 <tr>
-<th>Date:</th> <td>Mon, 02 Dec 2024</td> <th>  Prob (F-statistic):</th> <td>  0.00</td>
+<th>Date:</th> <td>Tue, 10 Dec 2024</td> <th>  Prob (F-statistic):</th> <td>  0.00</td>
 </tr>
 <tr>
-<th>Time:</th> <td>01:30:03</td> <th>  Log-Likelihood:    </th> <td>-1.3305e+05</td>
+<th>Time:</th> <td>21:46:22</td> <th>  Log-Likelihood:    </th> <td>-1.3305e+05</td>
 </tr>
 <tr>
 <th>No. Observations:</th> <td> 71903</td> <th>  AIC:               </th> <td>2.661e+05</td>
@@ -7986,11 +7988,10 @@ Formula: Q("PM2.5 in the air") ~ Q("Percent White") + Q("Percent Black or Africa
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [7]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [6]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1">#conduct anova test on the model</span>
-<span class="n">anova_table</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">anova_lm</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">typ</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">anova_table</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">anova_lm</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">typ</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">anova_table</span>
 </pre></div>
 </div>
@@ -8002,7 +8003,7 @@ Formula: Q("PM2.5 in the air") ~ Q("Percent White") + Q("Percent Black or Africa
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[7]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[6]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <div>
 <style scoped="">
@@ -8162,7 +8163,7 @@ Multicollinearity and non-normal residuals may require further investigation to 
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [8]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [7]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1">#conduct multiple regression analysis on total population, pm2.5, and energy burden</span>
@@ -8178,7 +8179,7 @@ Multicollinearity and non-normal residuals may require further investigation to 
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[8]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[7]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <table class="simpletable">
 <caption>OLS Regression Results</caption>
@@ -8192,10 +8193,10 @@ Multicollinearity and non-normal residuals may require further investigation to 
 <th>Method:</th> <td>Least Squares</td> <th>  F-statistic:       </th> <td>   307.9</td>
 </tr>
 <tr>
-<th>Date:</th> <td>Mon, 02 Dec 2024</td> <th>  Prob (F-statistic):</th> <td>6.95e-134</td>
+<th>Date:</th> <td>Tue, 10 Dec 2024</td> <th>  Prob (F-statistic):</th> <td>6.95e-134</td>
 </tr>
 <tr>
-<th>Time:</th> <td>01:30:03</td> <th>  Log-Likelihood:    </th> <td>-1.4142e+05</td>
+<th>Time:</th> <td>21:46:22</td> <th>  Log-Likelihood:    </th> <td>-1.4142e+05</td>
 </tr>
 <tr>
 <th>No. Observations:</th> <td> 71717</td> <th>  AIC:               </th> <td>2.828e+05</td>
@@ -8247,11 +8248,10 @@ Multicollinearity and non-normal residuals may require further investigation to 
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [9]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [8]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1">#conduct anova test on the model</span>
-<span class="n">anova_table2</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">anova_lm</span><span class="p">(</span><span class="n">model2</span><span class="p">,</span> <span class="n">typ</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">anova_table2</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">anova_lm</span><span class="p">(</span><span class="n">model2</span><span class="p">,</span> <span class="n">typ</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">anova_table2</span>
 </pre></div>
 </div>
@@ -8263,7 +8263,7 @@ Multicollinearity and non-normal residuals may require further investigation to 
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[9]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[8]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <div>
 <style scoped="">
@@ -8388,11 +8388,10 @@ Below is the ranking of racial/ethnic groups by the strength of their associatio
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [10]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [9]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1">#conduct multiple regression analysis on heart disease and race variables</span>
-<span class="n">model3</span> <span class="o">=</span> <span class="n">ols</span><span class="p">(</span><span class="s1">'Q("Coronary heart disease among adults aged greater than or equal to 18 years") ~ Q("Percent American Indian / Alaska Native") + Q("Percent Asian") + Q("Percent Black or African American alone") + Q("Percent Hispanic or Latino") + Q("Percent Native Hawaiian or Pacific") + Q("Percent other races") + Q("Percent White")'</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">reg_stats</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">model3</span> <span class="o">=</span> <span class="n">ols</span><span class="p">(</span><span class="s1">'Q("Coronary heart disease among adults aged greater than or equal to 18 years") ~ Q("Percent American Indian / Alaska Native") + Q("Percent Asian") + Q("Percent Black or African American alone") + Q("Percent Hispanic or Latino") + Q("Percent Native Hawaiian or Pacific") + Q("Percent other races") + Q("Percent White")'</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">reg_stats</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
 <span class="n">model3</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -8404,7 +8403,7 @@ Below is the ranking of racial/ethnic groups by the strength of their associatio
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[10]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[9]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <table class="simpletable">
 <caption>OLS Regression Results</caption>
@@ -8418,10 +8417,10 @@ Below is the ranking of racial/ethnic groups by the strength of their associatio
 <th>Method:</th> <td>Least Squares</td> <th>  F-statistic:       </th> <td>   1989.</td>
 </tr>
 <tr>
-<th>Date:</th> <td>Mon, 02 Dec 2024</td> <th>  Prob (F-statistic):</th> <td>  0.00</td>
+<th>Date:</th> <td>Tue, 10 Dec 2024</td> <th>  Prob (F-statistic):</th> <td>  0.00</td>
 </tr>
 <tr>
-<th>Time:</th> <td>01:30:03</td> <th>  Log-Likelihood:    </th> <td>-4.6792e+05</td>
+<th>Time:</th> <td>21:46:22</td> <th>  Log-Likelihood:    </th> <td>-4.6792e+05</td>
 </tr>
 <tr>
 <th>No. Observations:</th> <td> 70301</td> <th>  AIC:               </th> <td>9.359e+05</td>
@@ -8488,11 +8487,10 @@ Below is the ranking of racial/ethnic groups by the strength of their associatio
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [11]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [10]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1">#conduct anova test on the model</span>
-<span class="n">anova_table3</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">anova_lm</span><span class="p">(</span><span class="n">model3</span><span class="p">,</span> <span class="n">typ</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">anova_table3</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">anova_lm</span><span class="p">(</span><span class="n">model3</span><span class="p">,</span> <span class="n">typ</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">anova_table3</span>
 </pre></div>
 </div>
@@ -8504,7 +8502,7 @@ Below is the ranking of racial/ethnic groups by the strength of their associatio
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[11]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[10]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <div>
 <style scoped="">
@@ -8599,11 +8597,10 @@ Below is the ranking of racial/ethnic groups by the strength of their associatio
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [12]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [11]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1">#correlation matrix between population, pm2.5, and energy burden</span>
-<span class="n">correlation_matrix</span> <span class="o">=</span> <span class="n">reg_stats</span><span class="p">[[</span><span class="s1">'Total population'</span><span class="p">,</span> <span class="s1">'PM2.5 in the air'</span><span class="p">,</span> <span class="s1">'Energy burden'</span><span class="p">]]</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">correlation_matrix</span> <span class="o">=</span> <span class="n">reg_stats</span><span class="p">[[</span><span class="s1">'Total population'</span><span class="p">,</span> <span class="s1">'PM2.5 in the air'</span><span class="p">,</span> <span class="s1">'Energy burden'</span><span class="p">]]</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
 <span class="n">correlation_matrix</span>
 </pre></div>
 </div>
@@ -8615,7 +8612,7 @@ Below is the ranking of racial/ethnic groups by the strength of their associatio
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[12]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[11]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <div>
 <style scoped="">
@@ -8658,6 +8655,772 @@ Below is the ranking of racial/ethnic groups by the strength of their associatio
 <td>-0.090541</td>
 <td>-0.061125</td>
 <td>1.000000</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [12]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">correlation_matrix2</span> <span class="o">=</span> <span class="n">reg_stats</span><span class="p">[[</span><span class="s1">'Percent American Indian / Alaska Native'</span><span class="p">,</span> <span class="s1">'Percent Asian'</span><span class="p">,</span> <span class="s1">'Percent Black or African American alone'</span><span class="p">,</span> <span class="s1">'Percent Hispanic or Latino'</span><span class="p">,</span> <span class="s1">'Percent Native Hawaiian or Pacific'</span><span class="p">,</span> <span class="s1">'Percent White'</span><span class="p">,</span> <span class="s1">'Low median household income as a percent of area median income (percentile)'</span><span class="p">]]</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+<span class="n">correlation_matrix2</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[12]:</div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>Percent American Indian / Alaska Native</th>
+<th>Percent Asian</th>
+<th>Percent Black or African American alone</th>
+<th>Percent Hispanic or Latino</th>
+<th>Percent Native Hawaiian or Pacific</th>
+<th>Percent White</th>
+<th>Low median household income as a percent of area median income (percentile)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>Percent American Indian / Alaska Native</th>
+<td>1.000000</td>
+<td>-0.041762</td>
+<td>-0.054269</td>
+<td>-0.011134</td>
+<td>0.001004</td>
+<td>-0.094293</td>
+<td>0.087014</td>
+</tr>
+<tr>
+<th>Percent Asian</th>
+<td>-0.041762</td>
+<td>1.000000</td>
+<td>-0.114486</td>
+<td>0.019751</td>
+<td>0.115148</td>
+<td>-0.261417</td>
+<td>-0.130827</td>
+</tr>
+<tr>
+<th>Percent Black or African American alone</th>
+<td>-0.054269</td>
+<td>-0.114486</td>
+<td>1.000000</td>
+<td>-0.085010</td>
+<td>-0.030612</td>
+<td>-0.587199</td>
+<td>0.408756</td>
+</tr>
+<tr>
+<th>Percent Hispanic or Latino</th>
+<td>-0.011134</td>
+<td>0.019751</td>
+<td>-0.085010</td>
+<td>1.000000</td>
+<td>-0.014563</td>
+<td>-0.659535</td>
+<td>0.217523</td>
+</tr>
+<tr>
+<th>Percent Native Hawaiian or Pacific</th>
+<td>0.001004</td>
+<td>0.115148</td>
+<td>-0.030612</td>
+<td>-0.014563</td>
+<td>1.000000</td>
+<td>-0.090217</td>
+<td>0.040047</td>
+</tr>
+<tr>
+<th>Percent White</th>
+<td>-0.094293</td>
+<td>-0.261417</td>
+<td>-0.587199</td>
+<td>-0.659535</td>
+<td>-0.090217</td>
+<td>1.000000</td>
+<td>-0.432730</td>
+</tr>
+<tr>
+<th>Low median household income as a percent of area median income (percentile)</th>
+<td>0.087014</td>
+<td>-0.130827</td>
+<td>0.408756</td>
+<td>0.217523</td>
+<td>0.040047</td>
+<td>-0.432730</td>
+<td>1.000000</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [13]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">model4</span> <span class="o">=</span> <span class="n">ols</span><span class="p">(</span><span class="s1">'Q("Low median household income as a percent of area median income (percentile)") ~ Q("Percent American Indian / Alaska Native") + Q("Percent Asian") + Q("Percent Black or African American alone") + Q("Percent Hispanic or Latino") + Q("Percent Native Hawaiian or Pacific") + Q("Percent other races") + Q("Percent White")'</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">reg_stats</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">model4</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[13]:</div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
+<table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tr>
+<th>Dep. Variable:</th> <td>Q("Low median household income as a percent of area median income (percentile)")</td> <th>  R-squared:         </th> <td>   0.270</td>
+</tr>
+<tr>
+<th>Model:</th> <td>OLS</td> <th>  Adj. R-squared:    </th> <td>   0.270</td>
+</tr>
+<tr>
+<th>Method:</th> <td>Least Squares</td> <th>  F-statistic:       </th> <td>   3647.</td>
+</tr>
+<tr>
+<th>Date:</th> <td>Tue, 10 Dec 2024</td> <th>  Prob (F-statistic):</th> <td>  0.00</td>
+</tr>
+<tr>
+<th>Time:</th> <td>21:46:23</td> <th>  Log-Likelihood:    </th> <td>-3.1961e+05</td>
+</tr>
+<tr>
+<th>No. Observations:</th> <td> 69113</td> <th>  AIC:               </th> <td>6.392e+05</td>
+</tr>
+<tr>
+<th>Df Residuals:</th> <td> 69105</td> <th>  BIC:               </th> <td>6.393e+05</td>
+</tr>
+<tr>
+<th>Df Model:</th> <td>     7</td> <th> </th> <td> </td>
+</tr>
+<tr>
+<th>Covariance Type:</th> <td>nonrobust</td> <th> </th> <td> </td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+<td></td> <th>coef</th> <th>std err</th> <th>t</th> <th>P&gt;|t|</th> <th>[0.025</th> <th>0.975]</th>
+</tr>
+<tr>
+<th>Intercept</th> <td>   97.1802</td> <td>    2.674</td> <td>   36.339</td> <td> 0.000</td> <td>   91.939</td> <td>  102.422</td>
+</tr>
+<tr>
+<th>Q("Percent American Indian / Alaska Native")</th> <td>    3.1348</td> <td>    3.453</td> <td>    0.908</td> <td> 0.364</td> <td>   -3.634</td> <td>    9.903</td>
+</tr>
+<tr>
+<th>Q("Percent Asian")</th> <td> -103.1449</td> <td>    3.187</td> <td>  -32.365</td> <td> 0.000</td> <td> -109.391</td> <td>  -96.899</td>
+</tr>
+<tr>
+<th>Q("Percent Black or African American alone")</th> <td>   -6.5267</td> <td>    2.784</td> <td>   -2.344</td> <td> 0.019</td> <td>  -11.984</td> <td>   -1.069</td>
+</tr>
+<tr>
+<th>Q("Percent Hispanic or Latino")</th> <td>  -38.6641</td> <td>    2.661</td> <td>  -14.527</td> <td> 0.000</td> <td>  -43.881</td> <td>  -33.448</td>
+</tr>
+<tr>
+<th>Q("Percent Native Hawaiian or Pacific")</th> <td>   95.6935</td> <td>   13.629</td> <td>    7.021</td> <td> 0.000</td> <td>   68.981</td> <td>  122.406</td>
+</tr>
+<tr>
+<th>Q("Percent other races")</th> <td>   50.4086</td> <td>    1.611</td> <td>   31.288</td> <td> 0.000</td> <td>   47.251</td> <td>   53.566</td>
+</tr>
+<tr>
+<th>Q("Percent White")</th> <td>  -62.5916</td> <td>    2.805</td> <td>  -22.317</td> <td> 0.000</td> <td>  -68.089</td> <td>  -57.094</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+<th>Omnibus:</th> <td>2993.723</td> <th>  Durbin-Watson:     </th> <td>   0.964</td>
+</tr>
+<tr>
+<th>Prob(Omnibus):</th> <td> 0.000</td> <th>  Jarque-Bera (JB):  </th> <td>1278.049</td>
+</tr>
+<tr>
+<th>Skew:</th> <td> 0.058</td> <th>  Prob(JB):          </th> <td>2.99e-278</td>
+</tr>
+<tr>
+<th>Kurtosis:</th> <td> 2.344</td> <th>  Cond. No.          </th> <td>    177.</td>
+</tr>
+</table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [14]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">anova_table4</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">anova_lm</span><span class="p">(</span><span class="n">model4</span><span class="p">,</span> <span class="n">typ</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">anova_table4</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[14]:</div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>sum_sq</th>
+<th>df</th>
+<th>F</th>
+<th>PR(&gt;F)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>Q("Percent American Indian / Alaska Native")</th>
+<td>5.014204e+02</td>
+<td>1.0</td>
+<td>0.824000</td>
+<td>3.640163e-01</td>
+</tr>
+<tr>
+<th>Q("Percent Asian")</th>
+<td>6.374377e+05</td>
+<td>1.0</td>
+<td>1047.522171</td>
+<td>4.314699e-228</td>
+</tr>
+<tr>
+<th>Q("Percent Black or African American alone")</th>
+<td>3.343227e+03</td>
+<td>1.0</td>
+<td>5.494034</td>
+<td>1.908428e-02</td>
+</tr>
+<tr>
+<th>Q("Percent Hispanic or Latino")</th>
+<td>1.284254e+05</td>
+<td>1.0</td>
+<td>211.045694</td>
+<td>9.554880e-48</td>
+</tr>
+<tr>
+<th>Q("Percent Native Hawaiian or Pacific")</th>
+<td>3.000056e+04</td>
+<td>1.0</td>
+<td>49.300896</td>
+<td>2.215787e-12</td>
+</tr>
+<tr>
+<th>Q("Percent other races")</th>
+<td>5.957116e+05</td>
+<td>1.0</td>
+<td>978.952251</td>
+<td>2.108710e-213</td>
+</tr>
+<tr>
+<th>Q("Percent White")</th>
+<td>3.030707e+05</td>
+<td>1.0</td>
+<td>498.045921</td>
+<td>6.202352e-110</td>
+</tr>
+<tr>
+<th>Residual</th>
+<td>4.205174e+07</td>
+<td>69105.0</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1">#multiple linear regression model for race , asthma and PM2.5 in Tennessee</span>
+<span class="n">tn_stats</span> <span class="o">=</span> <span class="n">reg_stats</span><span class="p">[</span><span class="n">reg_stats</span><span class="p">[</span><span class="s1">'State/Territory'</span><span class="p">]</span> <span class="o">==</span> <span class="s1">'Tennessee'</span><span class="p">]</span>
+<span class="n">model5</span> <span class="o">=</span> <span class="n">ols</span><span class="p">(</span><span class="s1">'Q("Current asthma among adults aged greater than or equal to 18 years") ~ Q("Percent American Indian / Alaska Native") + Q("Percent Asian") + Q("Percent Black or African American alone") + Q("Percent Hispanic or Latino") + Q("Percent Native Hawaiian or Pacific") + Q("Percent other races") + Q("Percent White") + Q("PM2.5 in the air")'</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tn_stats</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">model5</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[ ]:</div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
+<table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tr>
+<th>Dep. Variable:</th> <td>Q("Current asthma among adults aged greater than or equal to 18 years")</td> <th>  R-squared:         </th> <td>   0.544</td>
+</tr>
+<tr>
+<th>Model:</th> <td>OLS</td> <th>  Adj. R-squared:    </th> <td>   0.541</td>
+</tr>
+<tr>
+<th>Method:</th> <td>Least Squares</td> <th>  F-statistic:       </th> <td>   219.0</td>
+</tr>
+<tr>
+<th>Date:</th> <td>Tue, 10 Dec 2024</td> <th>  Prob (F-statistic):</th> <td>3.21e-244</td>
+</tr>
+<tr>
+<th>Time:</th> <td>21:46:23</td> <th>  Log-Likelihood:    </th> <td> -8728.6</td>
+</tr>
+<tr>
+<th>No. Observations:</th> <td>  1480</td> <th>  AIC:               </th> <td>1.748e+04</td>
+</tr>
+<tr>
+<th>Df Residuals:</th> <td>  1471</td> <th>  BIC:               </th> <td>1.752e+04</td>
+</tr>
+<tr>
+<th>Df Model:</th> <td>     8</td> <th> </th> <td> </td>
+</tr>
+<tr>
+<th>Covariance Type:</th> <td>nonrobust</td> <th> </th> <td> </td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+<td></td> <th>coef</th> <th>std err</th> <th>t</th> <th>P&gt;|t|</th> <th>[0.025</th> <th>0.975]</th>
+</tr>
+<tr>
+<th>Intercept</th> <td> 1561.4667</td> <td>  114.663</td> <td>   13.618</td> <td> 0.000</td> <td> 1336.545</td> <td> 1786.388</td>
+</tr>
+<tr>
+<th>Q("Percent American Indian / Alaska Native")</th> <td>  820.2325</td> <td>  505.610</td> <td>    1.622</td> <td> 0.105</td> <td> -171.560</td> <td> 1812.025</td>
+</tr>
+<tr>
+<th>Q("Percent Asian")</th> <td>-1330.8508</td> <td>  155.363</td> <td>   -8.566</td> <td> 0.000</td> <td>-1635.607</td> <td>-1026.095</td>
+</tr>
+<tr>
+<th>Q("Percent Black or African American alone")</th> <td>  327.2786</td> <td>  110.294</td> <td>    2.967</td> <td> 0.003</td> <td>  110.928</td> <td>  543.629</td>
+</tr>
+<tr>
+<th>Q("Percent Hispanic or Latino")</th> <td>  198.6155</td> <td>  121.238</td> <td>    1.638</td> <td> 0.102</td> <td>  -39.202</td> <td>  436.433</td>
+</tr>
+<tr>
+<th>Q("Percent Native Hawaiian or Pacific")</th> <td> -381.9157</td> <td> 1023.375</td> <td>   -0.373</td> <td> 0.709</td> <td>-2389.346</td> <td> 1625.514</td>
+</tr>
+<tr>
+<th>Q("Percent other races")</th> <td>   40.3141</td> <td>  121.917</td> <td>    0.331</td> <td> 0.741</td> <td> -198.836</td> <td>  279.464</td>
+</tr>
+<tr>
+<th>Q("Percent White")</th> <td>  -62.3386</td> <td>  111.136</td> <td>   -0.561</td> <td> 0.575</td> <td> -280.341</td> <td>  155.664</td>
+</tr>
+<tr>
+<th>Q("PM2.5 in the air")</th> <td>  -67.1389</td> <td>    4.427</td> <td>  -15.165</td> <td> 0.000</td> <td>  -75.823</td> <td>  -58.454</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+<th>Omnibus:</th> <td>138.314</td> <th>  Durbin-Watson:     </th> <td>   1.070</td>
+</tr>
+<tr>
+<th>Prob(Omnibus):</th> <td> 0.000</td> <th>  Jarque-Bera (JB):  </th> <td> 254.483</td>
+</tr>
+<tr>
+<th>Skew:</th> <td> 0.624</td> <th>  Prob(JB):          </th> <td>5.49e-56</td>
+</tr>
+<tr>
+<th>Kurtosis:</th> <td> 4.602</td> <th>  Cond. No.          </th> <td>3.71e+03</td>
+</tr>
+</table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.<br/>[2] The condition number is large, 3.71e+03. This might indicate that there are<br/>strong multicollinearity or other numerical problems.
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [16]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">anova_table5</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">anova_lm</span><span class="p">(</span><span class="n">model5</span><span class="p">,</span> <span class="n">typ</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">anova_table5</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[16]:</div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>sum_sq</th>
+<th>df</th>
+<th>F</th>
+<th>PR(&gt;F)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>Q("Percent American Indian / Alaska Native")</th>
+<td>2.056446e+04</td>
+<td>1.0</td>
+<td>2.631742</td>
+<td>1.049610e-01</td>
+</tr>
+<tr>
+<th>Q("Percent Asian")</th>
+<td>5.733751e+05</td>
+<td>1.0</td>
+<td>73.377815</td>
+<td>2.659585e-17</td>
+</tr>
+<tr>
+<th>Q("Percent Black or African American alone")</th>
+<td>6.880273e+04</td>
+<td>1.0</td>
+<td>8.805046</td>
+<td>3.052506e-03</td>
+</tr>
+<tr>
+<th>Q("Percent Hispanic or Latino")</th>
+<td>2.097130e+04</td>
+<td>1.0</td>
+<td>2.683807</td>
+<td>1.015870e-01</td>
+</tr>
+<tr>
+<th>Q("Percent Native Hawaiian or Pacific")</th>
+<td>1.088277e+03</td>
+<td>1.0</td>
+<td>0.139272</td>
+<td>7.090591e-01</td>
+</tr>
+<tr>
+<th>Q("Percent other races")</th>
+<td>8.543958e+02</td>
+<td>1.0</td>
+<td>0.109342</td>
+<td>7.409422e-01</td>
+</tr>
+<tr>
+<th>Q("Percent White")</th>
+<td>2.458536e+03</td>
+<td>1.0</td>
+<td>0.314632</td>
+<td>5.749372e-01</td>
+</tr>
+<tr>
+<th>Q("PM2.5 in the air")</th>
+<td>1.797002e+06</td>
+<td>1.0</td>
+<td>229.971705</td>
+<td>2.249661e-48</td>
+</tr>
+<tr>
+<th>Residual</th>
+<td>1.149441e+07</td>
+<td>1471.0</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">model6</span> <span class="o">=</span> <span class="n">ols</span><span class="p">(</span><span class="s1">'Q("Energy burden") ~ Q("Percent American Indian / Alaska Native") + Q("Percent Asian") + Q("Percent Black or African American alone") + Q("Percent Hispanic or Latino") + Q("Percent Native Hawaiian or Pacific") + Q("Percent other races") + Q("Percent White")'</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">reg_stats</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">model6</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[ ]:</div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
+<table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tr>
+<th>Dep. Variable:</th> <td>Q("Energy burden")</td> <th>  R-squared:         </th> <td>   0.025</td>
+</tr>
+<tr>
+<th>Model:</th> <td>OLS</td> <th>  Adj. R-squared:    </th> <td>   0.025</td>
+</tr>
+<tr>
+<th>Method:</th> <td>Least Squares</td> <th>  F-statistic:       </th> <td>   265.1</td>
+</tr>
+<tr>
+<th>Date:</th> <td>Tue, 10 Dec 2024</td> <th>  Prob (F-statistic):</th> <td>  0.00</td>
+</tr>
+<tr>
+<th>Time:</th> <td>21:46:23</td> <th>  Log-Likelihood:    </th> <td>-2.2309e+05</td>
+</tr>
+<tr>
+<th>No. Observations:</th> <td> 73071</td> <th>  AIC:               </th> <td>4.462e+05</td>
+</tr>
+<tr>
+<th>Df Residuals:</th> <td> 73063</td> <th>  BIC:               </th> <td>4.463e+05</td>
+</tr>
+<tr>
+<th>Df Model:</th> <td>     7</td> <th> </th> <td> </td>
+</tr>
+<tr>
+<th>Covariance Type:</th> <td>nonrobust</td> <th> </th> <td> </td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+<td></td> <th>coef</th> <th>std err</th> <th>t</th> <th>P&gt;|t|</th> <th>[0.025</th> <th>0.975]</th>
+</tr>
+<tr>
+<th>Intercept</th> <td>   -1.1072</td> <td>    0.533</td> <td>   -2.076</td> <td> 0.038</td> <td>   -2.153</td> <td>   -0.062</td>
+</tr>
+<tr>
+<th>Q("Percent American Indian / Alaska Native")</th> <td>    7.7734</td> <td>    0.696</td> <td>   11.173</td> <td> 0.000</td> <td>    6.410</td> <td>    9.137</td>
+</tr>
+<tr>
+<th>Q("Percent Asian")</th> <td>   -0.8152</td> <td>    0.630</td> <td>   -1.294</td> <td> 0.196</td> <td>   -2.050</td> <td>    0.419</td>
+</tr>
+<tr>
+<th>Q("Percent Black or African American alone")</th> <td>    6.5868</td> <td>    0.556</td> <td>   11.853</td> <td> 0.000</td> <td>    5.498</td> <td>    7.676</td>
+</tr>
+<tr>
+<th>Q("Percent Hispanic or Latino")</th> <td>    3.8263</td> <td>    0.532</td> <td>    7.190</td> <td> 0.000</td> <td>    2.783</td> <td>    4.869</td>
+</tr>
+<tr>
+<th>Q("Percent Native Hawaiian or Pacific")</th> <td>    7.6882</td> <td>    2.013</td> <td>    3.820</td> <td> 0.000</td> <td>    3.744</td> <td>   11.633</td>
+</tr>
+<tr>
+<th>Q("Percent other races")</th> <td>    0.1252</td> <td>    0.303</td> <td>    0.413</td> <td> 0.680</td> <td>   -0.469</td> <td>    0.720</td>
+</tr>
+<tr>
+<th>Q("Percent White")</th> <td>    3.8787</td> <td>    0.560</td> <td>    6.932</td> <td> 0.000</td> <td>    2.782</td> <td>    4.975</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+<th>Omnibus:</th> <td>373494.871</td> <th>  Durbin-Watson:     </th> <td>   1.897</td>
+</tr>
+<tr>
+<th>Prob(Omnibus):</th> <td> 0.000</td> <th>  Jarque-Bera (JB):  </th> <td>10970468457555.480</td>
+</tr>
+<tr>
+<th>Skew:</th> <td>233.493</td> <th>  Prob(JB):          </th> <td>    0.00</td>
+</tr>
+<tr>
+<th>Kurtosis:</th> <td>60028.051</td> <th>  Cond. No.          </th> <td>    135.</td>
+</tr>
+</table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [18]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">anova_table6</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">anova_lm</span><span class="p">(</span><span class="n">model6</span><span class="p">,</span> <span class="n">typ</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">anova_table6</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[18]:</div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>sum_sq</th>
+<th>df</th>
+<th>F</th>
+<th>PR(&gt;F)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>Q("Percent American Indian / Alaska Native")</th>
+<td>3.279840e+03</td>
+<td>1.0</td>
+<td>124.844041</td>
+<td>5.811787e-29</td>
+</tr>
+<tr>
+<th>Q("Percent Asian")</th>
+<td>4.399637e+01</td>
+<td>1.0</td>
+<td>1.674680</td>
+<td>1.956369e-01</td>
+</tr>
+<tr>
+<th>Q("Percent Black or African American alone")</th>
+<td>3.690977e+03</td>
+<td>1.0</td>
+<td>140.493581</td>
+<td>2.223261e-32</td>
+</tr>
+<tr>
+<th>Q("Percent Hispanic or Latino")</th>
+<td>1.358269e+03</td>
+<td>1.0</td>
+<td>51.701232</td>
+<td>6.523856e-13</td>
+</tr>
+<tr>
+<th>Q("Percent Native Hawaiian or Pacific")</th>
+<td>3.833946e+02</td>
+<td>1.0</td>
+<td>14.593555</td>
+<td>1.334802e-04</td>
+</tr>
+<tr>
+<th>Q("Percent other races")</th>
+<td>4.474434e+00</td>
+<td>1.0</td>
+<td>0.170315</td>
+<td>6.798331e-01</td>
+</tr>
+<tr>
+<th>Q("Percent White")</th>
+<td>1.262507e+03</td>
+<td>1.0</td>
+<td>48.056141</td>
+<td>4.176089e-12</td>
+</tr>
+<tr>
+<th>Residual</th>
+<td>1.919475e+06</td>
+<td>73063.0</td>
+<td>NaN</td>
+<td>NaN</td>
 </tr>
 </tbody>
 </table>
